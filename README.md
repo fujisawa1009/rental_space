@@ -1,25 +1,65 @@
-# README
+初回のみ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+$ git init
 
-Things you may want to cover:
+$ git add .
 
-* Ruby version
+$ git commit "initial commit"
 
-* System dependencies
+$ git remote add origin 上記手順で作成したGitHubリポジトリのURL
 
-* Configuration
+$ git push origin main
 
-* Database creation
+初回のみDB作成 $ docker-compose up
 
-* Database initialization
+$ docker-compose exec web bash
 
-* How to run the test suite
+$ bin/rails db:create
 
-* Services (job queues, cache servers, search engines, etc.)
+# 起動メモ
+docker-compose run --rm web bundle
 
-* Deployment instructions
+docker-compose build
 
-* ...
-# rental_space
+docker compose up
+
+# rspecメモ
+rspec --initを実行すると自動的に以下ファイルが生成
+.rspec
+spec/rails_helper.rb
+spec/spec_helper.rb
+実行時は
+docker compose exec web bashしてから
+
+rspec
+
+# rubocopメモ
+rubocop -a
+
+# erb-lint ERBチェック
+bundle exec erblint . -a
+
+#改修メモ
+Gem を追加したので bundle install を実行してください
+
+カラムを追加したので bin/rails db:migrate を実行してください
+
+コマンドでの実行
+gemインストール
+
+docker-compose  run --rm web bundle
+
+■モデル作成手順
+
+docker compose exec web bash
+
+bin/rails g model post
+
+マイグレーションファイルを書き換える
+
+docker compose exec web bash
+
+bin/rails db:migrate
+
+もしくは
+docker-compose run web bundle exec rake db:migrate
