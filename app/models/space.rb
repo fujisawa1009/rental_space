@@ -24,4 +24,13 @@ class Space < ApplicationRecord
   def main_image
     images.first || 'http://placehold.jp/300x200.png'
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ['name', 'description', 'address', 'nearest_station']
+  end
+
+  # ransackable_associationsメソッドを追加
+  def self.ransackable_associations(auth_object = nil)
+    ["space_types"]
+  end
 end
